@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual Environment
+venv/
+.venv/
+
+# Environment Variables
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python cache
+.pytest_cache/
+.mypy_cache/
+
+# Build
+build/
+dist/
+*.egg-info/
+
+# Uploads
+backend/uploads/*
+
+# Keep folder structure
+!backend/uploads/.gitkeep
+
+# Vector Store
+backend/vector_store/*
+
+# Keep folder structure
+!backend/vector_store/.gitkeep
+
+# Logs
+*.log
+
+# Database
+*.db
+*.sqlite3
