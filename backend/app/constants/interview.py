@@ -27,3 +27,8 @@ class QuestionSource(str, Enum):
 
 class SubmissionType(str, Enum):
     TEXT = "TEXT"
+
+class Recommendation(str, Enum):
+    HIRE = "HIRE"
+    BORDERLINE = "BORDERLINE"
+    NO_HIRE = "NO_HIRE"

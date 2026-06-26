@@ -103,3 +103,9 @@ class InterviewSession(Base):
     back_populates="interview_session",
     cascade="all, delete-orphan",
     )
+    summary = relationship(
+    "InterviewSummary",
+    back_populates="interview_session",
+    uselist=False,
+    cascade="all, delete-orphan",
+)
