@@ -59,3 +59,9 @@ class Resume(Base):
     )
 
     user = relationship("User", back_populates="resumes")
+    
+    interview_sessions = relationship(
+    "InterviewSession",
+    back_populates="resume",
+    cascade="all, delete-orphan",
+    )

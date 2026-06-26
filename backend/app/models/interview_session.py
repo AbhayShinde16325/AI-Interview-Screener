@@ -4,9 +4,7 @@ from uuid import UUID, uuid4
 from sqlalchemy import DateTime, ForeignKey, Integer, String, func
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-
-from app.constants.interview_status import InterviewStatus
-from app.constants.roles import Role
+from app.constants.interview import Role, InterviewStatus
 from app.core.database import Base
 
 
@@ -93,4 +91,15 @@ class InterviewSession(Base):
     resume = relationship(
         "Resume",
         back_populates="interview_sessions",
+    )
+    
+    questions = relationship(
+    "Question",
+    back_populates="interview_session",
+    cascade="all, delete-orphan",
+    )
+    questions = relationship(
+    "Question",
+    back_populates="interview_session",
+    cascade="all, delete-orphan",
     )
