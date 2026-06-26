@@ -8,8 +8,8 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.core.database import Base
 
 
-class Question(Base):
-    __tablename__ = "questions"
+class Answer(Base):
+    __tablename__ = "answers"
 
     id: Mapped[UUID] = mapped_column(
         PG_UUID(as_uuid=True),
@@ -17,35 +17,27 @@ class Question(Base):
         default=uuid4,
     )
 
-    interview_session_id: Mapped[UUID] = mapped_column(
+    question_id: Mapped[UUID] = mapped_column(
         PG_UUID(as_uuid=True),
-        ForeignKey("interview_sessions.id", ondelete="CASCADE"),
+        ForeignKey("questions.id", ondelete="CASCADE"),
         nullable=False,
+        unique=True,
         index=True,
     )
 
-    question_number: Mapped[int] = mapped_column(
-        Integer,
-        nullable=False,
-    )
-
-    question_text: Mapped[str] = mapped_column(
+    answer_text: Mapped[str] = mapped_column(
         Text,
         nullable=False,
     )
 
-    difficulty: Mapped[str] = mapped_column(
+    submission_type: Mapped[str] = mapped_column(
         String(20),
         nullable=False,
+        default="TEXT",
     )
 
-    source: Mapped[str] = mapped_column(
-        String(30),
-        nullable=False,
-    )
-
-    context_snapshot: Mapped[str] = mapped_column(
-        Text,
+    answer_duration_seconds: Mapped[int] = mapped_column(
+        Integer,
         nullable=False,
     )
 
@@ -55,14 +47,7 @@ class Question(Base):
         nullable=False,
     )
 
-    interview_session = relationship(
-        "InterviewSession",
-        back_populates="questions",
-    )
-    
-    answer = relationship(
-    "Answer",
-    back_populates="question",
-    uselist=False,
-    cascade="all, delete-orphan",
+    question = relationship(
+        "Question",
+        back_populates="answer",
     )

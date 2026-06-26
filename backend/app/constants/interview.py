@@ -24,3 +24,6 @@ class QuestionSource(str, Enum):
     RESUME = "RESUME"
     KNOWLEDGE_BASE = "KNOWLEDGE_BASE"
     MIXED = "MIXED"
+
+class SubmissionType(str, Enum):
+    TEXT = "TEXT"
