@@ -40,7 +40,7 @@ class Resume(Base):
         nullable=False,
     )
 
-    extracted_skills: Mapped[list] = mapped_column(
+    parsed_resume: Mapped[list] = mapped_column(
         JSONB,
         nullable=True,
     )

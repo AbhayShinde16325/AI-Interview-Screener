@@ -4,7 +4,7 @@ from uuid import UUID
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials
 from sqlalchemy.orm import Session
-
+from app.services.resume_service import ResumeService
 from app.core.database import get_db
 from app.core.security import (
     decode_access_token,
@@ -58,3 +58,11 @@ def get_current_user(
         )
     
     return user
+
+def get_resume_service(
+    db: Annotated[
+        Session,
+        Depends(get_db),
+    ],
+) -> ResumeService:
+    return ResumeService(db)

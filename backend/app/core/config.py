@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     database_user: str
     database_password: str
     database_url: str
-
+    gemini_api_key: str
     # JWT
     secret_key: str
     algorithm: str

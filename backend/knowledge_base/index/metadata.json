@@ -1,0 +1,8 @@
+[
+  {
+    "category": "backend",
+    "filename": "python.md",
+    "chunk_number": 0,
+    "content": "# Python\n\nPython is an interpreted programming language.\n\nImportant interview topics:\n\n- OOP\n- Lists\n- Tuples\n- Dictionaries\n- Sets\n- Exception Handling\n- Decorators\n- Generators\n- Context Managers\n\nCommon interview questions:\n\nWhat is the difference between list and tuple?\n\nExplain Python's GIL.\n\nWhat are generators?\n\nWhat are decorators?"
+  }
+]
