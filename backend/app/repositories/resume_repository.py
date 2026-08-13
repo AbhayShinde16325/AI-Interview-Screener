@@ -31,3 +31,19 @@ class ResumeRepository:
             .filter(Resume.id == resume_id)
             .first()
         )
+    
+    def get_latest_by_user(
+        self,
+        user_id,
+    ):
+
+        return (
+        self.db.query(Resume)
+        .filter(
+            Resume.user_id == user_id
+        )
+        .order_by(
+            Resume.created_at.desc()
+        )
+        .first()
+        )

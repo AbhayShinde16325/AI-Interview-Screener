@@ -10,3 +10,13 @@ class ResumeResponse(BaseModel):
     id: UUID
     filename: str
     created_at: datetime
+
+
+class LatestResumeResponse(BaseModel):
+    """Latest resume for a user, including the parsed summary + skills."""
+
+    id: UUID
+    filename: str
+    created_at: datetime
+    summary: str
+    skills: list[str]

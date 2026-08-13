@@ -1,11 +1,16 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, status
 
 from app.core.dependencies import (
     get_auth_service,
-      get_current_user,
+    get_current_user,
 )
+from app.core.exceptions import (
+    AuthenticationError,
+    ResourceAlreadyExistsError,
+)
+from app.models.user import User
 from app.schemas.auth import (
     LoginRequest,
     RegisterRequest,
@@ -13,7 +18,7 @@ from app.schemas.auth import (
 )
 from app.schemas.users import UserResponse
 from app.services.auth_service import AuthService
-from app.models.user import User
+
 router = APIRouter(
     prefix="/auth",
     tags=["Authentication"],
@@ -35,6 +40,7 @@ def register(
     user = service.register(request)
     return UserResponse.model_validate(user)
 
+
 @router.post(
     "/login",
     response_model=TokenResponse,
@@ -46,14 +52,9 @@ def login(
         Depends(get_auth_service),
     ],
 ):
-    try:
-        return service.login(request)
+    return service.login(request)
 
-    except ValueError as e:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail=str(e),
-        )
+
 @router.get(
     "/me",
     response_model=UserResponse,

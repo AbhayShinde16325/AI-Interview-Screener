@@ -5,6 +5,8 @@ class Role(str, Enum):
     AI_ML_ENGINEER = "AI_ML_ENGINEER"
     BACKEND_ENGINEER = "BACKEND_ENGINEER"
     DATA_ENGINEER = "DATA_ENGINEER"
+    PYTHON_DEVELOPER = "PYTHON_DEVELOPER"
+    FULL_STACK_DEVELOPER = "FULL_STACK_DEVELOPER"
 
 
 class InterviewStatus(str, Enum):
@@ -27,6 +29,7 @@ class QuestionSource(str, Enum):
 
 class SubmissionType(str, Enum):
     TEXT = "TEXT"
+    MCQ = "MCQ"
 
 class Recommendation(str, Enum):
     HIRE = "HIRE"

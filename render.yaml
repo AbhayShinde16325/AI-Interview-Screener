@@ -1,0 +1,36 @@
+# Render Blueprint — deploys the FastAPI backend.
+# https://render.com/docs/blueprint-spec
+#
+# How to use:
+#   1. Create a free Neon PostgreSQL database and copy its connection string.
+#   2. Create a Gemini API key at https://aistudio.google.com/apikey
+#   3. On Render: New -> Blueprint -> point to this repo.
+#   4. Add the env vars below (or set them on the service after creation).
+
+services:
+  - type: web
+    name: ai-interview-screener-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    preDeployCommand: alembic upgrade head
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+        # Paste your Neon connection string, e.g.
+        # postgresql://user:password@ep-xxx.region.aws.neon.tech/neondb?sslmode=require
+      - key: GEMINI_API_KEY
+        sync: false
+        # Paste your Google Gemini API key
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ALGORITHM
+        value: HS256
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "1440"
+      - key: CORS_ORIGINS
+        value: http://localhost:5173,https://your-frontend.vercel.app
+      - key: PYTHON_VERSION
+        value: 3.11.9

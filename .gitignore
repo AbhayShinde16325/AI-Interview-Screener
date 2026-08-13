@@ -7,8 +7,11 @@ __pycache__/
 venv/
 .venv/
 
-# Environment Variables
+# Environment Variables (keep the example template)
 .env
+.env.local
+.env.*.local
+!.env.example
 
 # IDE
 .vscode/
@@ -29,14 +32,10 @@ dist/
 
 # Uploads
 backend/uploads/*
-
-# Keep folder structure
 !backend/uploads/.gitkeep
 
-# Vector Store
+# Vector Store (legacy)
 backend/vector_store/*
-
-# Keep folder structure
 !backend/vector_store/.gitkeep
 
 # Logs
@@ -45,3 +44,10 @@ backend/vector_store/*
 # Database
 *.db
 *.sqlite3
+
+# Node / Frontend
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+npm-debug.log*

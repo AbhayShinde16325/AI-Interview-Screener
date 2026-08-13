@@ -1,5 +1,149 @@
 [
   {
+    "category": "ai_ml",
+    "filename": "deep_learning.md",
+    "chunk_number": 0,
+    "content": "# Deep Learning\n\nDeep learning uses multi-layer neural networks to learn representations from\nraw data."
+  },
+  {
+    "category": "ai_ml",
+    "filename": "deep_learning.md",
+    "chunk_number": 1,
+    "content": "## Neural Networks\n\nA neural network is composed of layers of neurons. Each neuron computes a\nweighted sum of its inputs, applies a non-linear activation function, and\npasses the result to the next layer. The non-linearity is essential: without\nit, stacked linear layers would collapse into a single linear transformation."
+  },
+  {
+    "category": "ai_ml",
+    "filename": "deep_learning.md",
+    "chunk_number": 2,
+    "content": "## Backpropagation\n\nBackpropagation computes the gradient of the loss with respect to every\nweight in the network using the chain rule, propagating errors backward from\nthe output layer to the input layer. Gradients are then used by an optimizer\nsuch as SGD or Adam to update the weights."
+  },
+  {
+    "category": "ai_ml",
+    "filename": "deep_learning.md",
+    "chunk_number": 3,
+    "content": "## Activation Functions\n\n- ReLU: fast, avoids vanishing gradients in deep networks, but can \"die\".\n- Sigmoid: bounded 0-1, used for binary output, but saturates.\n- Softmax: converts logits into a probability distribution, used for\n  multi-class classification."
+  },
+  {
+    "category": "ai_ml",
+    "filename": "deep_learning.md",
+    "chunk_number": 4,
+    "content": "## Overfitting in Deep Learning\n\nLarge models memorize the training set. Regularization techniques include\ndropout, weight decay (L2), early stopping, and data augmentation."
+  },
+  {
+    "category": "ai_ml",
+    "filename": "deep_learning.md",
+    "chunk_number": 5,
+    "content": "## Common Interview Questions\n\n- What is the vanishing gradient problem and how is it addressed?\n- Explain backpropagation in simple terms.\n- Why do we need non-linear activation functions?\n- What is dropout and why does it work?\n- Difference between SGD, momentum, and Adam optimizers."
+  },
+  {
+    "category": "ai_ml",
+    "filename": "machine_learning.md",
+    "chunk_number": 0,
+    "content": "# Machine Learning Fundamentals\n\nMachine learning is the study of computer algorithms that improve automatically\nthrough experience."
+  },
+  {
+    "category": "ai_ml",
+    "filename": "machine_learning.md",
+    "chunk_number": 1,
+    "content": "## Supervised Learning\n\nIn supervised learning the training data contains labeled examples: an input\nand the correct output. The model learns a mapping from inputs to outputs and\ngeneralizes to unseen data. Common tasks are classification (predicting a\ncategory) and regression (predicting a continuous value)."
+  },
+  {
+    "category": "ai_ml",
+    "filename": "machine_learning.md",
+    "chunk_number": 2,
+    "content": "## Unsupervised Learning\n\nIn unsupervised learning the data has no labels. The goal is to find structure\nin the data. Common tasks are clustering (grouping similar points) and\ndimensionality reduction (compressing features while keeping structure)."
+  },
+  {
+    "category": "ai_ml",
+    "filename": "machine_learning.md",
+    "chunk_number": 3,
+    "content": "## Bias and Variance\n\nBias is the error introduced by approximating a real problem with a too-simple\nmodel. Variance is the error introduced by a model that is too sensitive to\nsmall fluctuations in the training data. High bias causes underfitting; high\nvariance causes overfitting."
+  },
+  {
+    "category": "ai_ml",
+    "filename": "machine_learning.md",
+    "chunk_number": 4,
+    "content": "## Cross-Validation\n\nCross-validation splits the data into folds and trains the model on all but\none fold, evaluating on the held-out fold, repeated for every fold. This gives\na more reliable estimate of generalization than a single train/test split."
+  },
+  {
+    "category": "ai_ml",
+    "filename": "machine_learning.md",
+    "chunk_number": 5,
+    "content": "## Common Interview Questions\n\n- Explain the difference between supervised and unsupervised learning.\n- What is overfitting and how do you prevent it?\n- What is the bias-variance tradeoff?\n- Why do we split data into train, validation, and test sets?\n- What is cross-validation and when would you use it?"
+  },
+  {
+    "category": "ai_ml",
+    "filename": "rag_llm.md",
+    "chunk_number": 0,
+    "content": "# LLMs and Retrieval-Augmented Generation"
+  },
+  {
+    "category": "ai_ml",
+    "filename": "rag_llm.md",
+    "chunk_number": 1,
+    "content": "## Large Language Models\n\nLarge language models are trained to predict the next token in a sequence over\nenormous text corpora. They can follow instructions, reason, and generate\ncoherent text. Common limitations are hallucination (confidently stating false\ninformation) and stale knowledge (training data has a cutoff date)."
+  },
+  {
+    "category": "ai_ml",
+    "filename": "rag_llm.md",
+    "chunk_number": 2,
+    "content": "## Retrieval-Augmented Generation (RAG)\n\nRAG grounds the model's answer in an external knowledge base:\n\n1. A query is embedded and searched against a vector store.\n2. The top relevant chunks are retrieved.\n3. Chunks are injected into the prompt as context.\n4. The model answers using only that context.\n\nBenefits: up-to-date knowledge, reduced hallucination, and the ability to cite\nsources. The two main stages are ingestion (chunk, embed, index) and retrieval\n(embed query, search, rank)."
+  },
+  {
+    "category": "ai_ml",
+    "filename": "rag_llm.md",
+    "chunk_number": 3,
+    "content": "## Chunking\n\nDocuments must be split into chunks small enough to fit the model context and\nretrievable at the right granularity. Heading-aware chunking preserves\nsemantic boundaries; a small overlap between chunks avoids cutting ideas in\nhalf. Chunk size is a tradeoff between precision and context."
+  },
+  {
+    "category": "ai_ml",
+    "filename": "rag_llm.md",
+    "chunk_number": 4,
+    "content": "## Embeddings\n\nEmbeddings map text to dense vectors where semantically similar text is close\nin vector space. Similarity is usually measured with cosine similarity or\nEuclidean distance."
+  },
+  {
+    "category": "ai_ml",
+    "filename": "rag_llm.md",
+    "chunk_number": 5,
+    "content": "## Common Interview Questions\n\n- What is RAG and why is it useful?\n- How would you reduce hallucination in an LLM application?\n- What is a vector database and when would you use one?\n- How do you choose a chunk size for a knowledge base?\n- What is the difference between fine-tuning and RAG?"
+  },
+  {
+    "category": "ai_ml",
+    "filename": "vector_databases.md",
+    "chunk_number": 0,
+    "content": "# Vector Databases and Similarity Search"
+  },
+  {
+    "category": "ai_ml",
+    "filename": "vector_databases.md",
+    "chunk_number": 1,
+    "content": "## Why Vector Search\n\nMachine learning models represent text, images, and other data as embedding\nvectors. Finding similar items means finding nearby vectors in a high\ndimensional space."
+  },
+  {
+    "category": "ai_ml",
+    "filename": "vector_databases.md",
+    "chunk_number": 2,
+    "content": "## Approximate Nearest Neighbor (ANN)\n\nExact nearest-neighbor search is too slow for millions of vectors. ANN\nalgorithms trade a little accuracy for large speed gains.\n\n- **Flat index (exact)**: brute-force scan, exact but slow.\n- **IVF (inverted file)**: clusters vectors, searches only the closest\n  clusters. Fast and memory friendly.\n- **HNSW**: builds a graph of similar items; excellent recall and speed,\n  higher memory usage.\n- **PQ (product quantization)**: compresses vectors, very low memory, lower\n  precision."
+  },
+  {
+    "category": "ai_ml",
+    "filename": "vector_databases.md",
+    "chunk_number": 3,
+    "content": "## FAISS\n\nFAISS is a library for efficient similarity search, developed by Meta. It\nstores vectors in an in-memory index and returns the k nearest neighbors plus\ntheir distances. Metadata (source filename, chunk number, content) is kept\nalongside so retrieved vectors can be traced back to their documents."
+  },
+  {
+    "category": "ai_ml",
+    "filename": "vector_databases.md",
+    "chunk_number": 4,
+    "content": "## Distance Metrics\n\n- **L2 (Euclidean)**: distance in absolute space.\n- **Cosine**: angle between vectors, robust to vector length differences."
+  },
+  {
+    "category": "ai_ml",
+    "filename": "vector_databases.md",
+    "chunk_number": 5,
+    "content": "## Common Interview Questions\n\n- What is the difference between an exact and an approximate index?\n- When would you choose HNSW over a flat index?\n- What does \"k\" mean in k-nearest-neighbor search?\n- How is metadata stored alongside vectors?\n- How do you measure if a retrieval system is good?"
+  },
+  {
     "category": "backend",
     "filename": "python.md",
     "chunk_number": 0,

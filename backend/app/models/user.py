@@ -53,8 +53,8 @@ class User(Base):
     back_populates="user",
     cascade="all, delete-orphan",
     )
-    interview_sessions = relationship(
-    "InterviewSession",
+    interviews = relationship(
+    "Interview",
     back_populates="user",
     cascade="all, delete-orphan",
     )

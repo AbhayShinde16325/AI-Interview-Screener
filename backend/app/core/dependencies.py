@@ -13,7 +13,9 @@ from app.core.security import (
 from app.models.user import User
 from app.repositories.user_repository import UserRepository
 from app.services.auth_service import AuthService
-
+from app.services.interview_service import (
+    InterviewService,
+)
 
 def get_auth_service(
     db: Annotated[Session, Depends(get_db)],
@@ -66,3 +68,12 @@ def get_resume_service(
     ],
 ) -> ResumeService:
     return ResumeService(db)
+
+def get_interview_service(
+    db: Annotated[
+        Session,
+        Depends(get_db),
+    ],
+) -> InterviewService:
+
+    return InterviewService(db)

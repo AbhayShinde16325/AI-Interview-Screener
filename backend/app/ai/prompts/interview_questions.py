@@ -1,66 +1,146 @@
 QUESTION_GENERATION_PROMPT = """
 You are a Senior Technical Interviewer.
 
-Candidate Information
+Your job is to generate a complete interview for a candidate.
 
-{resume_summary}
+=========================
+TARGET ROLE
+=========================
 
-==================================================
+{role}
 
-Interview Skill
+=========================
+CANDIDATE RESUME
+=========================
 
-{skill}
+{resume}
 
-==================================================
+=========================
+INTERVIEW PLAN
+=========================
 
-Knowledge Base
+{interview_plan}
 
-{knowledge}
+=========================
+KNOWLEDGE BASE
+=========================
 
-==================================================
+{knowledge_context}
 
-Generate exactly {count} interview questions.
+=========================
+INSTRUCTIONS
+=========================
 
-Requirements
+Generate the COMPLETE interview in one response.
 
-- Return ONLY valid JSON.
-- Do not use markdown.
-- Do not explain anything.
+Strictly follow the interview plan.
 
-Use ONLY these difficulty values:
+The total number of questions MUST equal the total_questions field.
 
-Easy
-Medium
-Hard
+For every skill:
 
-Use ONLY these question types:
+- Ask exactly the requested number of questions.
+- Cover different concepts.
+- Do NOT repeat topics.
+- Do NOT generate duplicate questions.
 
-Conceptual
-Coding
-Scenario
+Progress naturally:
 
-Do not invent new values.
+1. Easy conceptual questions
+2. Intermediate implementation questions
+3. Debugging / problem solving
+4. Candidate project discussion
+5. Scenario-based engineering questions
 
-Questions must be based on BOTH:
-1. Candidate Resume
-2. Knowledge Base
+The interview should feel like it is conducted by a senior engineer.
 
-Avoid duplicate questions.
+Use the candidate's resume whenever possible.
+
+Prioritize questions relevant to the TARGET ROLE.
+
+Use the Knowledge Base as the primary technical reference.
+
+If the resume contains projects relevant to the role,
+ask project-specific questions.
+
+=========================
+QUESTION TYPES
+=========================
+
+Mix MCQ and written questions naturally:
+
+- MCQ (multiple choice) - 4 options, exactly one correct answer. Roughly
+  half of the questions should be MCQ.
+- Conceptual - written answer
+- Coding - written answer
+- Scenario - written answer
+
+For MCQ questions:
+
+- Provide exactly 4 options.
+- "correct_answer" must be the EXACT text of one of the options.
+- "options" and "correct_answer" are REQUIRED for MCQ questions.
+
+For written questions:
+
+- Do NOT include "options" or "correct_answer".
+
+=========================
+DIFFICULTY
+=========================
+
+Mix:
+
+- Easy
+- Medium
+- Hard
+
+=========================
+OUTPUT
+=========================
+
+Return ONLY valid JSON.
+
+Do NOT return markdown.
+
+Do NOT explain anything.
+
+Schema for a WRITTEN question:
 
 {{
-  "questions":[
-    {{
-      "id":1,
-      "skill":"Python",
-      "difficulty":"Medium",
-      "type":"Conceptual",
-      "question":"...",
-      "expected_topics":[
-        "...",
-        "..."
-      ],
-      "knowledge_source":"python.md"
-    }}
-  ]
+  "id": 1,
+  "skill": "Python",
+  "difficulty": "Easy",
+  "type": "Conceptual",
+  "question": "...",
+  "expected_topics": [
+    "...",
+    "..."
+  ],
+  "knowledge_source": "python.md"
 }}
+
+Schema for an MCQ question:
+
+{{
+  "id": 1,
+  "skill": "Python",
+  "difficulty": "Easy",
+  "type": "MCQ",
+  "question": "...",
+  "options": [
+    "...",
+    "...",
+    "...",
+    "..."
+  ],
+  "correct_answer": "...",
+  "expected_topics": [
+    "...",
+    "..."
+  ],
+  "knowledge_source": "python.md"
+}}
+
+Wrap everything in a top-level "questions" array.
 """
