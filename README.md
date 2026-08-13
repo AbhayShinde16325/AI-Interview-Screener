@@ -7,7 +7,7 @@ interview grounded in a role-specific knowledge base — then evaluates the
 candidate's answers and produces a hiring recommendation.
 
 Built as an AI/ML & Backend Engineering internship assignment. It is designed,
-structured, and deployed like a real startup MVP, not a tutorial project.
+structured, and deployable like a real startup MVP, not a tutorial project.
 
 ---
 
