@@ -9,7 +9,7 @@ psycopg2-binary==2.9.12
 alembic==1.18.5
 
 # Auth / security
-pwdlib==0.3.0
+pwdlib[argon2]==0.3.0
 python-jose==3.5.0
 
 # Validation / config
