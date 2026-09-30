@@ -7,11 +7,10 @@ __pycache__/
 venv/
 .venv/
 
-# Environment Variables (keep the example template)
-.env
-.env.local
-.env.*.local
-!.env.example
+# Environment variables and secrets (at the repository root or in any app)
+# Keep only checked-in templates such as backend/.env.example.
+**/.env*
+!**/.env.example
 
 # IDE
 .vscode/

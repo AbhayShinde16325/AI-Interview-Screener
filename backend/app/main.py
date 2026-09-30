@@ -4,6 +4,8 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from google.genai import errors as genai_errors
+from sqlalchemy import text
+from sqlalchemy.exc import SQLAlchemyError
 
 from app.api.v1.auth import router as auth_router
 from app.api.v1.evaluation import router as evaluation_router
@@ -11,6 +13,7 @@ from app.api.v1.interviews import router as interviews_router
 from app.api.v1.resumes import router as resumes_router
 
 from app.core.config import settings
+from app.core.database import engine
 from app.core.exceptions import (
     AppError,
     AuthenticationError,
@@ -106,4 +109,15 @@ def root():
 
 @app.get("/health")
 def health():
-    return {"status": "ok"}
+    """Readiness probe used by Render and post-deploy checks."""
+    try:
+        with engine.connect() as connection:
+            connection.execute(text("SELECT 1"))
+    except SQLAlchemyError:
+        logger.exception("Health check failed: database is unavailable")
+        return JSONResponse(
+            status_code=503,
+            content={"status": "unavailable", "database": "unavailable"},
+        )
+
+    return {"status": "ok", "database": "ok"}

@@ -29,7 +29,8 @@ class Settings(BaseSettings):
     cors_origins: str = "http://localhost:5173,http://localhost:3000"
 
     # --- Application ---------------------------------------------------------
-    # Directory where uploaded resumes are stored (relative to backend/).
+    # Directory for short-lived PDFs while text is extracted (relative to
+    # backend/). Resume data itself is stored in PostgreSQL.
     upload_dir: str = "uploads"
 
     model_config = SettingsConfigDict(

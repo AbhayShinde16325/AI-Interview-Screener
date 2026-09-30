@@ -13,7 +13,7 @@ from app.parsers.pdf_parser import PDFParser
 from app.repositories.resume_repository import ResumeRepository
 
 UPLOAD_DIRECTORY = Path(settings.upload_dir)
-UPLOAD_DIRECTORY.mkdir(exist_ok=True)
+UPLOAD_DIRECTORY.mkdir(parents=True, exist_ok=True)
 
 MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024  # 10 MB
 
@@ -39,15 +39,21 @@ class ResumeService:
         if len(content) > MAX_FILE_SIZE_BYTES:
             raise ValidationError("File too large. Maximum size is 10 MB.")
 
-        # --- Persist file ------------------------------------------------
+        # --- Persist temporarily for PDF extraction ----------------------
+        # Render's filesystem is ephemeral. The application only needs the
+        # original PDF while extracting text; the extracted data is persisted
+        # in PostgreSQL below.
         unique_filename = f"{uuid4()}.pdf"
         file_path = UPLOAD_DIRECTORY / unique_filename
 
-        with open(file_path, "wb") as buffer:
-            buffer.write(content)
+        try:
+            with open(file_path, "wb") as buffer:
+                buffer.write(content)
 
-        # --- Extract + analyze --------------------------------------------
-        extracted_text = PDFParser.extract_text(str(file_path))
+            # --- Extract + analyze ----------------------------------------
+            extracted_text = PDFParser.extract_text(str(file_path))
+        finally:
+            file_path.unlink(missing_ok=True)
 
         if not extracted_text.strip():
             raise ValidationError(
@@ -60,7 +66,9 @@ class ResumeService:
         resume = Resume(
             user_id=current_user.id,
             filename=file.filename,
-            file_path=str(file_path),
+            # The original file is deliberately transient; parsed data and
+            # extracted text are the durable resume record.
+            file_path=f"transient://{unique_filename}",
             extracted_text=extracted_text,
             parsed_resume=parsed_resume.model_dump(),
         )
