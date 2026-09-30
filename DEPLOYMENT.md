@@ -16,7 +16,7 @@ provider's environment-variable settings, never in Git.
 3. Render reads `render.yaml`; set the prompted values:
    - `DATABASE_URL`: Neon connection string.
    - `GEMINI_API_KEY`: Gemini API key.
-4. Deploy. The Blueprint runs Alembic migrations before release and probes
+4. Deploy. The Blueprint runs Alembic migrations during the build and probes
    `/health`, which also verifies PostgreSQL connectivity.
 5. Copy the API URL, for example `https://ai-interview-screener-api.onrender.com`.
 
