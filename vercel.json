@@ -1,0 +1,29 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "services": {
+    "ai-interview-screener-api": {
+      "root": "backend",
+      "framework": "fastapi",
+      "entrypoint": "app/main.py",
+      "buildCommand": "pip install -r requirements.txt && alembic upgrade head"
+    },
+    "frontend": {
+      "root": "frontend",
+      "framework": "vite"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": {
+        "service": "ai-interview-screener-api"
+      }
+    },
+    {
+      "source": "/(.*)",
+      "destination": {
+        "service": "frontend"
+      }
+    }
+  ]
+}
